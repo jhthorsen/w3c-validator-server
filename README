@@ -1,0 +1,14 @@
+NAME
+    W3C::Validator::Server - http://validator.w3c.org
+
+VERSION
+    0.01
+
+DESCRIPTION
+SYNOPSIS
+        plackup lib/W3C/Validator/Server.pm
+
+COPYRIGHT & LICENSE
+AUTHOR
+    Jan Henning Thorsen - "jhthorsen at cpan.org"
+
