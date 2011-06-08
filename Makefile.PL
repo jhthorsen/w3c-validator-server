@@ -8,7 +8,7 @@ requires q(Plack::Middleware::SSI) => 0.10;
 
 bugtracker q(http://rt.cpan.org/NoAuth/Bugs.html?Dist=W3C-Validator-Server);
 homepage q(http://search.cpan.org/dist/W3C-Validator-Server);
-repository q(git://github.com///github.com/);
+repository q(git://github.com/jhthorsen/w3c-validator-server.git);
 
 install_script glob('bin/*');
 auto_install;
