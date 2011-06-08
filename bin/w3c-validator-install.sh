@@ -21,7 +21,11 @@ Usage:
     exit;
 fi
 
-if [ -e 'Makefile.PL' ]; then
+if [ "x$W3C_HOME" != "x" ]; then
+    DST="$W3C_HOME";
+    mkdir -p $DST;
+    echo "Installing to $DST ...";
+elif [ -e 'Makefile.PL' ]; then
     DST=".";
     echo "Installing to current directory ...";
 else
@@ -29,6 +33,9 @@ else
     mkdir -p $DST;
     echo "Installing to $DST ...";
 fi
+
+chdir $DST;
+echo "Working dir is $PWD";
 
 if [ "x$ACTION" = "xall" -o "x$ACTION" = "xlibs" ]; then
     echo "Installing libraries as root";
@@ -50,13 +57,13 @@ if [ "x$ACTION" = "xall" -o "x$ACTION" = "xfiles" ]; then
         tar xfz $f;
     done
 
-    rsync -a validator*/htdocs $DST/root/;
-    rsync -a validator*/httpd/cgi-bin $DST/root/;
-    rsync -a validator*/share/templates $DST/root/;
+    rsync -a validator*/htdocs root/;
+    rsync -a validator*/httpd/cgi-bin root/;
+    rsync -a validator*/share/templates root/;
 
-    mv root/htdocs/config $DST/config && echo "Set up $DST/config/";
-    rm -rf $DST/root/sgml-lib
-    mv root/htdocs/sgml-lib $DST/root/sgml-lib && echo "Set up $DST/root/sgml-lib/";
+    mv root/htdocs/config config && echo "Set up $DST/config/";
+    rm -rf root/sgml-lib
+    mv root/htdocs/sgml-lib root/sgml-lib && echo "Set up $DST/root/sgml-lib/";
 
     perl -pi -e'
         s,(\@import ".*style/\w+)",$1.css",;
@@ -65,14 +72,14 @@ if [ "x$ACTION" = "xall" -o "x$ACTION" = "xfiles" ]; then
 fi
 
 if [ "x$ACTION" = "xall" -o "x$ACTION" = "xconfig" ]; then
-    echo "Rewriting $DST/config/validator.conf";
+    echo "Rewriting config/validator.conf";
     perl -pi -e'
         s,#*Base\s*.*,Base = $ENV{PWD},;
         s,#*Templates\s*=.*,Templates = \$Base/root/templates,;
         s,#*TidyConf\s*=.*,TidyConf = \$Base/config/tidy.conf,;
         s,#*Library\s*=.*,Library = \$Base/root/sgml-lib,;
         s,#Allow Private IPs = .*,Allow Private IPs = yes,;
-    ' $DST/config/validator.conf;
+    ' config/validator.conf;
 fi
 
 exit 0;

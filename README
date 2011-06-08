@@ -10,6 +10,19 @@ DESCRIPTION
     offline or markup that is protected on an intranet. This server should
     provide the same sort of validation as <http://validator.w3c.org>.
 
+ENVIRONMENT VARIABLES
+  W3C_HOME
+    Will be used by both "w3c-validator-install.sh" and
+    "w3c-validator-server.psgi" to install and search for external files.
+    See "INSTALLATION" for details.
+
+  HOME
+    Will be used by both "w3c-validator-install.sh" and
+    "w3c-validator-server.psgi" to install and search for external files.
+    See "INSTALLATION" for details.
+
+    The directory holding files will be: "$HOME/.w3c-validator-server"
+
 INSTALLATION
     After downloading/installing this module you have to install some more
     external dependencies. This can be done by using the
@@ -41,6 +54,9 @@ METHODS
     See "version_cb" in Plack::Runner.
 
 COPYRIGHT & LICENSE
+    This library is free software. You can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
 AUTHOR
     Jan Henning Thorsen - "jhthorsen at cpan.org"
 

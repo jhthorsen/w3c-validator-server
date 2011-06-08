@@ -6,7 +6,11 @@ use Plack::Builder;
 use Plack::App::File::DirectoryIndex;
 use Plack::App::CGIBin;
 
-my $base = -e 'Makefile.PL' ? './' : "$ENV{HOME}/.w3c-validator-server";
+my $base = $ENV{'W3C_HOME'} ? $ENV{'W3C_HOME'}
+         : -e 'Makefile.PL' ? './'
+         :                    "$ENV{HOME}/.w3c-validator-server"
+         ;
+
 my $htdocs = "$base/root/htdocs";
 my $cgi_bin = "$base/root/cgi-bin";
 

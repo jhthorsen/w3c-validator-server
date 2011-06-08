@@ -14,6 +14,22 @@ This application is useful if you want to verify your HTML either offline
 or markup that is protected on an intranet. This server should provide
 the same sort of validation as L<http://validator.w3c.org>.
 
+=head1 ENVIRONMENT VARIABLES
+
+=head2 W3C_HOME
+
+Will be used by both C<w3c-validator-install.sh> and
+C<w3c-validator-server.psgi> to install and search for external files.
+See L</INSTALLATION> for details.
+
+=head2 HOME
+
+Will be used by both C<w3c-validator-install.sh> and
+C<w3c-validator-server.psgi> to install and search for external files.
+See L</INSTALLATION> for details.
+
+The directory holding files will be: C<$HOME/.w3c-validator-server>
+
 =head1 INSTALLATION
 
 After downloading/installing this module you have to install some more
