@@ -1,5 +1,8 @@
 Revision history for W3C::Validator::Server
 
+0.11     Wed Jun  8 21:22:06 CEST 2011
+       - Remove P::A::File::DirectoryIndex
+
 0.1002   Wed Jun  8 15:50:32 CEST 2011
        - Add missing dependencies
 
