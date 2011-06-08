@@ -1,1 +1,5 @@
 *.swp
+/inc
+/Makefile
+/MANIFEST
+/META.yml

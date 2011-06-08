@@ -48,7 +48,7 @@ use strict;
 use warnings;
 use base 'Plack::Runner';
 
-our $VERSION = '0.10';
+our $VERSION = eval '0.10';
 
 =head1 METHODS
 
@@ -63,6 +63,9 @@ sub version_cb {
 }
 
 =head1 COPYRIGHT & LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =head1 AUTHOR
 

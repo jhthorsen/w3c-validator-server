@@ -28,5 +28,6 @@ if(caller) {
     return BUILD_APP();
 }
 else {
+    push @INC, 'lib' if(-d 'lib');
     return (require W3C::Validator::Server)->run(BUILD_APP(), @ARGV);
 }

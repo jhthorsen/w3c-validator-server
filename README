@@ -1,12 +1,44 @@
 NAME
-    W3C::Validator::Server - http://validator.w3c.org
+    W3C::Validator::Server - Run http://validator.w3c.org as a local
+    instance
 
 VERSION
-    0.01
+    0.10
 
 DESCRIPTION
+    This application is useful if you want to verify your HTML either
+    offline or markup that is protected on an intranet. This server should
+    provide the same sort of validation as <http://validator.w3c.org>.
+
+INSTALLATION
+    After downloading/installing this module you have to install some more
+    external dependencies. This can be done by using the
+    w3c-validator-install.sh script, bundled with this package:
+
+        $ w3c-validator-install.sh all
+
+        # install libraries. Require sudo, apt-get and cpanm
+        $ w3c-validator-install.sh libs
+
+        # fetch files from http://validator.w3.org
+        $ w3c-validator-install.sh files
+
+        # rewrite config to defaults
+        $ w3c-validator-install.sh config
+
+    The files will be installed to your home directory, or current directory
+    if "Makefile.PL" is found. See
+    <http://validator.w3.org/docs/install.html> for more details.
+
 SYNOPSIS
-        plackup lib/W3C/Validator/Server.pm
+        $ w3c-validator-server.psgi
+        $ plackup /usr/bin/w3c-validator-server.psgi
+        $ starman path/to/w3c-validator-server.psgi
+        $ ./bin/w3c-validator-server.psgi
+
+METHODS
+  version_cb
+    See "version_cb" in Plack::Runner.
 
 COPYRIGHT & LICENSE
 AUTHOR

@@ -1,0 +1,6 @@
+Revision history for W3C::Validator::Server
+
+0.10
+       - First release of W3C::Validator::Server
+       - Add install and psgi script
+
