@@ -10,6 +10,6 @@ bugtracker q(http://rt.cpan.org/NoAuth/Bugs.html?Dist=W3C-Validator-Server);
 homepage q(http://search.cpan.org/dist/W3C-Validator-Server);
 repository q(git://github.com///github.com/);
 
-# install_script glob('bin/*');
+install_script glob('bin/*');
 auto_install;
 WriteAll;
