@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use Plack::Builder;
-use Plack::App::File;
+use Plack::App::File::DirectoryIndex;
 use Plack::App::CGIBin;
 
 my $base = -e 'Makefile.PL' ? './' : "$ENV{HOME}/.w3c-validator-server";
@@ -16,7 +16,7 @@ sub BUILD_APP {
     builder {
         mount '/' => builder {
             enable 'SSI';
-            Plack::App::File->new(root => $htdocs)->to_app;
+            Plack::App::File::DirectoryIndex->new(root => $htdocs)->to_app;
         };
         mount '/check' => (
             Plack::App::WrapCGI->new(script => "$cgi_bin/check")->to_app
