@@ -14,6 +14,27 @@ This application is useful if you want to verify your HTML either offline
 or markup that is protected on an intranet. This server should provide
 the same sort of validation as L<http://validator.w3c.org>.
 
+=head1 INSTALLATION
+
+After downloading/installing this module you have to install some more
+external dependencies. This can be done by using the
+L<w3c-validator-install.sh> script, bundled with this package:
+
+    $ w3c-validator-install.sh all
+
+    # install libraries. Require sudo, apt-get and cpanm
+    $ w3c-validator-install.sh libs
+
+    # fetch files from http://validator.w3.org
+    $ w3c-validator-install.sh files
+
+    # rewrite config to defaults
+    $ w3c-validator-install.sh config
+
+The files will be installed to your home directory, or current directory
+if C<Makefile.PL> is found. See L<http://validator.w3.org/docs/install.html>
+for more details.
+
 =head1 SYNOPSIS
 
     $ w3c-validator-server.psgi
