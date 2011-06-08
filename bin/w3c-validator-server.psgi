@@ -6,8 +6,11 @@ use Plack::Builder;
 use Plack::App::File;
 use Plack::App::CGIBin;
 
-my $htdocs = $ENV{'W3C_HTDOCS'} || 'htdocs';
-my $cgi_bin = $ENV{'W3C_CGI_BIN'} || 'cgi-bin';
+my $base = -e 'Makefile.PL' ? './' : "$ENV{HOME}/.w3c-validator-server";
+my $htdocs = "$base/root/htdocs";
+my $cgi_bin = "$base/root/cgi-bin";
+
+$ENV{'W3C_VALIDATOR_CFG'} ||= "$base/config/validator.conf";
 
 sub BUILD_APP {
     builder {
@@ -15,8 +18,8 @@ sub BUILD_APP {
             enable 'SSI';
             Plack::App::File->new(root => $htdocs)->to_app;
         };
-        mount '/cgi-bin' => (
-            Plack::App::CGIBin->new(script => $cgi_bin)->to_app
+        mount '/check' => (
+            Plack::App::WrapCGI->new(script => "$cgi_bin/check")->to_app
         );
     };
 }
