@@ -1,5 +1,8 @@
 Revision history for W3C::Validator::Server
 
+0.1002   Wed Jun  8 15:50:32 CEST 2011
+       - Add missing dependencies
+
 0.1001   Wed Jun  8 14:32:23 CEST 2011
        - Fix repository URL
 

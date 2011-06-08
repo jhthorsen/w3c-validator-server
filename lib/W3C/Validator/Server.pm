@@ -6,7 +6,7 @@ W3C::Validator::Server - Run http://validator.w3c.org as a local instance
 
 =head1 VERSION
 
-0.1001
+0.1002
 
 =head1 DESCRIPTION
 
@@ -64,7 +64,7 @@ use strict;
 use warnings;
 use base 'Plack::Runner';
 
-our $VERSION = eval '0.1001';
+our $VERSION = eval '0.1002';
 
 =head1 METHODS
 
