@@ -3,7 +3,7 @@ NAME
     instance
 
 VERSION
-    0.11
+    0.12
 
 DESCRIPTION
     This application is useful if you want to verify your HTML either
@@ -15,6 +15,11 @@ ENVIRONMENT VARIABLES
     Will be used by both "w3c-validator-install.sh" and
     "w3c-validator-server.psgi" to install and search for external files.
     See "INSTALLATION" for details.
+
+  W3C_VALIDATOR_CFG
+    Used by "cgi-bin/check" (from w3c). Default is to look for
+
+        $W3C_HOME/config/validator.conf
 
   HOME
     Will be used by both "w3c-validator-install.sh" and
@@ -50,6 +55,18 @@ SYNOPSIS
         $ ./bin/w3c-validator-server.psgi
 
 METHODS
+  build_app
+        $app = $class->build_app({
+                   home => '/path/to/...', # W3C_HOME
+                   htdocs => '/path/to/...', # W3C_HOME/root/htdocs
+                   cgi_bin => '/path/to/...', # W3C_HOME/root/cgi-bin
+                   validator_config => '/path/to/...', # W3C_VALIDATOR_CFG
+               });
+
+    Will use Plack::Builder to create a plack application.
+
+    See "ENVIRONMENT VARIABLES" for details on how to instruct this method.
+
   version_cb
     See "version_cb" in Plack::Runner.
 

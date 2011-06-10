@@ -1,5 +1,8 @@
 Revision history for W3C::Validator::Server
 
+0.12     Fri Jun 10 17:50:39 CEST 2011
+       - Add build_app() to W3C::Validator::Server
+
 0.11     Wed Jun  8 21:22:06 CEST 2011
        - Remove P::A::File::DirectoryIndex
 

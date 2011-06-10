@@ -6,7 +6,7 @@ W3C::Validator::Server - Run http://validator.w3c.org as a local instance
 
 =head1 VERSION
 
-0.11
+0.12
 
 =head1 DESCRIPTION
 
@@ -21,6 +21,12 @@ the same sort of validation as L<http://validator.w3c.org>.
 Will be used by both C<w3c-validator-install.sh> and
 C<w3c-validator-server.psgi> to install and search for external files.
 See L</INSTALLATION> for details.
+
+=head2 W3C_VALIDATOR_CFG
+
+Used by C<cgi-bin/check> (from w3c). Default is to look for
+
+    $W3C_HOME/config/validator.conf
 
 =head2 HOME
 
@@ -62,11 +68,61 @@ for more details.
 
 use strict;
 use warnings;
+use Plack::Builder;
+use Plack::App::File;
+use Plack::App::CGIBin;
 use base 'Plack::Runner';
 
-our $VERSION = eval '0.11';
+our $VERSION = eval '0.12';
 
 =head1 METHODS
+
+=head2 build_app
+
+    $app = $class->build_app({
+               home => '/path/to/...', # W3C_HOME
+               htdocs => '/path/to/...', # W3C_HOME/root/htdocs
+               cgi_bin => '/path/to/...', # W3C_HOME/root/cgi-bin
+               validator_config => '/path/to/...', # W3C_VALIDATOR_CFG
+           });
+
+Will use L<Plack::Builder> to create a plack application.
+
+See L</ENVIRONMENT VARIABLES> for details on how to instruct this method.
+
+=cut
+
+sub build_app {
+    my $class = shift;
+    my $args = ref $_[0] eq 'HASH' ? shift : {@_};
+    my $base = $args->{'home'}  ? $args->{'home'}
+             : $ENV{'W3C_HOME'} ? $ENV{'W3C_HOME'}
+             : -e 'Makefile.PL' ? './'
+             :                    "$ENV{HOME}/.w3c-validator-server"
+             ;
+
+    my $htdocs = $args->{'htdocs'} || "$base/root/htdocs";
+    my $cgi_bin = $args->{'cgi_bin'} || "$base/root/cgi-bin";
+
+    $ENV{'W3C_VALIDATOR_CFG'} ||= $args->{'validator_config'} || "$base/config/validator.conf";
+
+    builder {
+        mount '/' => builder {
+            enable sub {
+                my $app = shift;
+                sub {
+                    $_[0]->{'PATH_INFO'} = '/index.html' if($_[0]->{'PATH_INFO'} eq '/');
+                    return $app->(@_);
+                };
+            };
+            enable 'SSI';
+            Plack::App::File->new(root => $htdocs)->to_app;
+        };
+        mount '/check' => (
+            Plack::App::WrapCGI->new(script => "$cgi_bin/check")->to_app
+        );
+    };
+}
 
 =head2 version_cb
 
