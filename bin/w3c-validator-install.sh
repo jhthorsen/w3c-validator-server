@@ -34,7 +34,7 @@ else
     echo "Installing to $DST ...";
 fi
 
-chdir $DST;
+cd $DST;
 echo "Working dir is $PWD";
 
 if [ "x$ACTION" = "xall" -o "x$ACTION" = "xlibs" ]; then
