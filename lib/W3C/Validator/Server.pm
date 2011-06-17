@@ -6,7 +6,7 @@ W3C::Validator::Server - Run http://validator.w3c.org as a local instance
 
 =head1 VERSION
 
-0.12
+0.1201
 
 =head1 DESCRIPTION
 
@@ -73,7 +73,7 @@ use Plack::App::File;
 use Plack::App::CGIBin;
 use base 'Plack::Runner';
 
-our $VERSION = eval '0.12';
+our $VERSION = eval '0.1201';
 
 =head1 METHODS
 
