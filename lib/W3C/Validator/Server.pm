@@ -2,7 +2,7 @@ package W3C::Validator::Server;
 
 =head1 NAME
 
-W3C::Validator::Server - Run http://validator.w3c.org as a local instance
+W3C::Validator::Server - Run https://validator.w3.org as a local instance
 
 =head1 VERSION
 
@@ -12,7 +12,7 @@ W3C::Validator::Server - Run http://validator.w3c.org as a local instance
 
 This application is useful if you want to verify your HTML either offline
 or markup that is protected on an intranet. This server should provide
-the same sort of validation as L<http://validator.w3c.org>.
+the same sort of validation as L<https://validator.w3.org>.
 
 =head1 ENVIRONMENT VARIABLES
 
